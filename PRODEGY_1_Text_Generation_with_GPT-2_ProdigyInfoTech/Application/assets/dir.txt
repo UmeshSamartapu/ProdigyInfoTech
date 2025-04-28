@@ -1,0 +1,15 @@
+gpt2-webapp/
+├── app/
+│   ├── __init__.py
+│   ├── main.py          # FastAPI application
+│   ├── models.py        # Model loading and inference
+│   ├── static/          # Static files (CSS, JS)
+│   │   └── styles.css
+│   └── templates/       # HTML templates
+│       └── index.html
+├── gpt2-finetuned/      # Your model files
+│   ├── adapter_config.json
+│   ├── adapter_model.safetensors
+│   ├── ...
+├── requirements.txt
+└── README.md
