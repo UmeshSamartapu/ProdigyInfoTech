@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Style Transfer | AI Art Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --background: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .upload-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .upload-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .upload-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .file-input-label {
+            display: block;
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #64748b;
+            transition: all 0.2s ease;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+
+        .file-input-label.dragover {
+            border-color: var(--primary);
+            background: #e0e7ff;
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-hover));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .result-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .result-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-top: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .result-image:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .upload-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Style Transfer</h1>
+        
+        <form action="/transfer" enctype="multipart/form-data" method="post">
+            <div class="upload-section">
+                <div class="upload-card">
+                    <input type="file" name="content_image" id="contentInput" required hidden>
+                    <label for="contentInput" class="file-input-label">
+                        <span class="upload-text">Upload Content Image</span>
+                        <span class="file-types">(JPG, PNG, WEBP)</span>
+                    </label>
+                    <img id="contentPreview" class="preview-image" alt="Content preview">
+                </div>
+
+                <div class="upload-card">
+                    <input type="file" name="style_image" id="styleInput" required hidden>
+                    <label for="styleInput" class="file-input-label">
+                        <span class="upload-text">Upload Style Image</span>
+                        <span class="file-types">(JPG, PNG, WEBP)</span>
+                    </label>
+                    <img id="stylePreview" class="preview-image" alt="Style preview">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Generate Artwork</button>
+        </form>
+
+        {% if result_image %}
+        <div class="result-section">
+            <h3>Your Generated Artwork</h3>
+            <img src="{{ result_image }}" class="result-image" alt="Styled result">
+            <div class="download-btn">
+                <button class="submit-btn" style="margin-top: 1rem;">Download Image</button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function handleFileSelect(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    input.previousElementSibling.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById('contentInput').addEventListener('change', function() {
+            handleFileSelect(this, 'contentPreview');
+        });
+
+        document.getElementById('styleInput').addEventListener('change', function() {
+            handleFileSelect(this, 'stylePreview');
+        });
+
+        // Drag and drop handling
+        const labels = document.querySelectorAll('.file-input-label');
+        labels.forEach(label => {
+            label.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                label.classList.add('dragover');
+            });
+
+            label.addEventListener('dragleave', () => {
+                label.classList.remove('dragover');
+            });
+
+            label.addEventListener('drop', (e) => {
+                e.preventDefault();
+                label.classList.remove('dragover');
+                const input = label.nextElementSibling;
+                input.files = e.dataTransfer.files;
+                input.dispatchEvent(new Event('change'));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+neural_style_app/
+│
+├── app.py                   # FastAPI logic
+├── style_transfer.py        # NST model logic (essential PyTorch code)
+├── nst_utils.py             # Helper functions: Gram Matrix, loss functions, etc.
+├── templates/
+│   └── index.html           # UI Template
+├── static/
+│   └── output.jpg           # Output image
+├── uploads/
+│   └── content.jpg / style.jpg
+└── requirements.txt
