@@ -17,7 +17,7 @@ This project demonstrates fine-tuning GPT-2 on a custom dataset and deploying it
 
 **Tech Stack:** Python, Hugging Face Transformers, PEFT, PyTorch, FastAPI, Jinja2, TensorBoard
 
-**[Detailed README inside the project folder](#)**
+**[Detailed README inside the project folder](https://github.com/UmeshSamartapu/ProdigyInfoTech/blob/main/PRODEGY_1_Text_Generation_with_GPT-2_ProdigyInfoTech/README.md)**
 
 ---
 
@@ -31,7 +31,7 @@ FastAPI-powered service for generating images from text prompts using **Stable D
 
 **Tech Stack:** FastAPI, Uvicorn, Diffusers, Transformers, Torch, Accelerate
 
-**[Detailed README inside the project folder](#)**
+**[Detailed README inside the project folder](https://github.com/UmeshSamartapu/ProdigyInfoTech/blob/main/PRODEGY_2_Image_Generation_with_Pre-trained%20Models_ProdigyInfoTech/README.md)**
 
 ---
 
@@ -44,7 +44,7 @@ A simple and lightweight project implementing text generation using Markov Chain
 
 **Tech Stack:** Python
 
-**[Detailed README inside the project folder](#)**
+**[Detailed README inside the project folder](https://github.com/UmeshSamartapu/ProdigyInfoTech/blob/main/PRODEGY_3_Text_Generation_with_Markov_Chains_ProdigyInfoTech/README.md)**
 
 ---
 
@@ -57,7 +57,7 @@ Conditional GAN (cGAN) based project for image-to-image translation tasks.
 
 **Tech Stack:** TensorFlow, Keras, Python
 
-**[Detailed README inside the project folder](#)**
+**[Detailed README inside the project folder](https://github.com/UmeshSamartapu/ProdigyInfoTech/blob/main/PRODEGY_4_Image-to-Image_Translation_with_cGAN_ProdigyInfoTech/README.md)**
 
 ---
 
@@ -70,7 +70,7 @@ Applying artistic style from one image onto the content of another image.
 
 **Tech Stack:** TensorFlow, Python, Matplotlib
 
-**[Detailed README inside the project folder](#)**
+**[Detailed README inside the project folder](https://github.com/UmeshSamartapu/ProdigyInfoTech/blob/main/PRODEGY_5_Neural_Style_Transfer_ProdigyInfoTech/README.md)**
 
 ---
 
