@@ -1,2 +1,7 @@
 .model/pix2pix_generator_model.h5
 .model/pix2pix_model.h5
+.env
+__pycache__
+__pycache__/
+static/generatuons/*
+venv/

@@ -1,3 +1,6 @@
+Quote:
+Success is not final, failure is not fatal: It is the courage to continue that counts.
+
 Science Topic:
 Quantum computing is an area of computing focused on developing computer technology based on the principles of quantum theory, which explains the nature and behavior of energy and matter on the quantum level. Quantum computers use quantum bits or qubits which can exist in multiple states simultaneously, unlike classical binary bits. This allows quantum computers to process massive amounts of data and solve complex problems much faster than traditional computers. Major companies like IBM, Google, and Microsoft are investing heavily in quantum computing research.
 

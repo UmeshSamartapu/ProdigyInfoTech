@@ -1,1 +1,6 @@
 gpt2_weights.pt
+.env
+_pycache__
+__pycache__/
+static/generatuons/*
+venv/
